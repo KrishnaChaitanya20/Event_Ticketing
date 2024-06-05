@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from database import mongo
-from lib.bson.objectid import ObjectId
+#from bson.objectid import ObjectId
 
 eventblueprint = Blueprint('eventblueprint', __name__)
 
