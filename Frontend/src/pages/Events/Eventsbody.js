@@ -1,7 +1,7 @@
 // EventsPage.js
 
 import React from 'react';
-import './EventsPage.css';
+import './Eventsbody.css';
 
 // Placeholder data for events with a placeholder image
 const events = [
@@ -13,13 +13,13 @@ const events = [
   { id: 6, name: 'Health Workshop', image: '/path/to/your/image6.jpg' },
 ];
 
-const EventsPage = () => {
+const Eventsbody = () => {
   return (
-    <div>
+    <div className='container'>
       <div className="events-grid">
-        {events.map(event => (
+        {events.map((event,index) => (
           <div
-            key={event.id}
+            key={index}
             className="event-card"
             style={{ backgroundImage: `url(${event.image})` }}
           >
@@ -31,4 +31,4 @@ const EventsPage = () => {
   );
 }
 
-export default EventsPage;
+export default Eventsbody;
