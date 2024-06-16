@@ -15,7 +15,7 @@ const events = [
 
 const Eventsbody = () => {
   return (
-    <div className='container'>
+    <div className='events-container'>
       <div className="events-grid">
         {events.map((event,index) => (
           <div
