@@ -35,11 +35,11 @@ function App() {
       element: <AdminLogin/>
     },
     {
-      path: "/Profilepage",
+      path: "/profile",
       element: <Profilepage/>
     },
     {
-      path: "/Bookingpage/:eventid",
+      path: "/bookings/:eventid",
       element: <Bookingpage/>
     },
   ]);
