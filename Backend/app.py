@@ -3,12 +3,14 @@ from database import mongo
 from EventService.eventblueprint import eventblueprint
 from BookingService.bookingblueprint import bookingblueprint
 from UserService.userblueprint import userblueprint
+from flask_cors import CORS
 
 import os
 from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 app.config["MONGO_URI"]=os.environ.get('MONGO_URI')
 mongo.init_app(app)
 
