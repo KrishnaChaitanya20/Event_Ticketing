@@ -35,7 +35,7 @@ function App() {
       element: <AdminLogin/>
     },
     {
-      path: "/Profilepage",
+      path: "/profile",
       element: <Profilepage/>
     },
     {

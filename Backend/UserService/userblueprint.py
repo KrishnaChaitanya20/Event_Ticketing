@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from bson import ObjectId
 from database import mongo
 
 userblueprint = Blueprint('userblueprint', __name__)
@@ -37,6 +38,7 @@ def login():
     user = mongo.db.users.find_one({'email': email, 'password': password})
     if user:
         response = {
+            'id': str(user['_id']),
             'name': user['name'],
             'email': user['email'],
             'events_attended': user['events_attended']
@@ -60,10 +62,12 @@ def add_user():
 
 @userblueprint.route('/updateUser/<id>', methods=['PUT'])
 def update_user(id):
+    print("URL Called with id: "+id)
+    id=ObjectId(id)
     user = mongo.db.users.find_one({'_id': id})
     if user:
         mongo.db.users.update_one({'_id': id}, {'$set': request.json})
-        return jsonify({'message': 'User updated successfully'})
+        return jsonify({'message': 'User updated successfully','status':200})
     else:
         return jsonify({'message': 'User not found'})
 
