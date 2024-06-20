@@ -3,17 +3,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    background-image: url('https://source.unsplash.com/random'); /* Random image from Unsplash */
-    background-repeat: no-repeat;
-    background-size: cover;
+    padding: 10px; 
   }
   
-  .aboutus-body h1 {
+  .aboutus-body h1, .aboutus-body h2 {
     font-size: 2.5em;
     color: #1a237e;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 8px; 
   }
   
   .aboutus-body p {
@@ -21,4 +18,17 @@
     color: #424242;
     text-align: center;
     max-width: 800px;
+    margin-bottom: 8px; 
+  }
+  
+  .team-section, .contact-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .team-member {
+    margin: 1px 0;
   }
