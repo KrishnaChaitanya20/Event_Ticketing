@@ -1,7 +1,7 @@
-import React from 'react'
-import { useState } from 'react';
-import './Profilebody.css'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useLogin } from 'LoginContext';
+import './Profilebody.css'
 
 const Profilebody = () => {
   const {user,setUser}=useLogin();
@@ -10,6 +10,14 @@ const Profilebody = () => {
   const [newname,setNewname]=useState(user.name);
   const [newemail,setNewemail]=useState(user.email);
   const [newpassword,setNewpassword]=useState('');
+
+  const navigate=useNavigate();
+  useEffect(()=>{
+    if(!user.name){
+      navigate('/login');
+      
+    }
+  },[user,navigate]);
 
   const handleEdit=()=>{
     setIsedit(true);

@@ -18,14 +18,22 @@ const Login = () => {
       body: JSON.stringify({ email, password }),
     });
 
-    const data = await response.json();
+    var data = await response.json();
     console.log(data);
     if (data.error) {
       alert(data.error);
-    } else {
-      setUser(data);
+      return;
+    }
+    if(data.status===200)
+    {
+      data=data.data;
+      setUser({email:data.email,name:data.name,events_attended:data.events_attended});
       navigate('/');
     }
+    else{
+      alert("Invalid Email or Password");
+    }
+    
   }
 
   return (
