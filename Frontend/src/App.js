@@ -8,6 +8,7 @@ import AdminLogin from 'pages/Admin/Adminlogin';
 import Profilepage from 'pages/Profile/Profilepage';
 import Bookingpage from 'pages/Booking/Bookingpage';
 import EventPage from 'pages/Event/EventPage';
+import Aboutus from 'pages/Aboutus/Aboutus';  
 function App() {
   const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ function App() {
     {
       path: "/bookings/:eventid",
       element: <Bookingpage/>
+    },
+    {
+      path: "/aboutus",
+      element: <Aboutus/>
     },
   ]);
   return (
