@@ -1,11 +1,14 @@
 /* Navbar.css */
 
 .navbar {
+  position: sticky;
+  top:0;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #F97053;
-  padding: 25px 25px;
+  padding: 10px 25px;
   color: black;
 }
 
