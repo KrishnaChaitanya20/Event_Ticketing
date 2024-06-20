@@ -2,15 +2,16 @@
 
 import React from 'react';
 import './Eventsbody.css';
+import images from 'util/category';
 
 // Placeholder data for events with a placeholder image
 const events = [
-  { id: 1, name: 'Concert', image: '/path/to/your/image1.jpg' },
-  { id: 2, name: 'Sports', image: '/path/to/your/image2.jpg' },
-  { id: 3, name: 'Art Exhibition', image: '/path/to/your/image3.jpg' },
-  { id: 4, name: 'Tech Conference', image: '/path/to/your/image4.jpg' },
-  { id: 5, name: 'Food Festival', image: '/path/to/your/image5.jpg' },
-  { id: 6, name: 'Health Workshop', image: '/path/to/your/image6.jpg' },
+  { id: 1, name: 'Concert', image: images.arts },
+  { id: 2, name: 'Sports', image: images.concert },
+  { id: 3, name: 'Art Exhibition', image: images.food },
+  { id: 4, name: 'Tech Conference', image: images.temp_health },
+  { id: 5, name: 'Food Festival', image: images.sport },
+  { id: 6, name: 'Health Workshop', image: images.tech },
 ];
 
 const Eventsbody = () => {
