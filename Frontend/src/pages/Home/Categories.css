@@ -35,6 +35,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 2rem;
+    opacity: 1;
   }
   
   @media (max-width: 425px) {
