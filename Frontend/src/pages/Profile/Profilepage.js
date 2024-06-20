@@ -3,10 +3,10 @@ import Navbar from "components/Navbar";
 import Profilebody from "./Profilebody";
 const Profilepage = () => {
     return ( 
-        <div>
+        <>
             <Navbar />
             <Profilebody/>
-        </div>
+        </>
      );
 }
  

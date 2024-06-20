@@ -1,100 +1,100 @@
-import React, { useState, useEffect } from 'react';
-import './Profilebody.css';
+import React from 'react'
+import { useState } from 'react';
+import './Profilebody.css'
+import { useLogin } from 'LoginContext';
 
-const Profile = () => {
-  const [userInfo, setUserInfo] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+const Profilebody = () => {
+  const {user,setUser}=useLogin();
+  const [isedit,setIsedit]=useState(false);
+  const [iseditpass,setIseditpass]=useState(false);
+  const [newname,setNewname]=useState(user.name);
+  const [newemail,setNewemail]=useState(user.email);
+  const [newpassword,setNewpassword]=useState('');
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [isChangingPassword, setIsChangingPassword] = useState(false);
-  const [newPassword, setNewPassword] = useState('');
+  const handleEdit=()=>{
+    setIsedit(true);
+  }
 
-  useEffect(() => {
-    // Fetch user information from the server or local storage
-    // Replace with your actual fetch logic
-    const fetchedUserInfo = {
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-    };
-    setUserInfo(fetchedUserInfo);
-  }, []);
+  const handleEditpass=()=>{
+    setIseditpass(true);
+  }
 
-  const handleEditProfile = () => {
-    setIsEditing(true);
-  };
+  const handleSave=()=>{
+      setIsedit(false);
+      const updateInServer=async()=>{
+        const url=process.env.REACT_APP_API_BASE_URL+'/users/updateUser/'+user.id 
+        console.log(url);
+        const response=await fetch(url,{
+          method:'PUT',
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify({name:newname,email:newemail})
+        });
+        const data=await response.json();
+        console.log(data);
+        if(data.status===200){
+          setUser({...user,name:newname,email:newemail});
+        }
+        else{
+          alert(data.message);
+        }
+      }
+      updateInServer();
+  }
 
-  const handleChangePassword = () => {
-    setIsChangingPassword(true);
-  };
+  const handleSavepass=()=>{
+    setIseditpass(false);
+    setUser({...user,password:newpassword});
+  }
 
-  const handleSaveProfile = (e) => {
-    e.preventDefault();
-    // Save profile changes to the server
-    setIsEditing(false);
-  };
+  const handleCancel=()=>{
+    setIsedit(false);
+    setIseditpass(false);
+  }
 
-  const handleSavePassword = (e) => {
-    e.preventDefault();
-    // Save new password to the server
-    alert('Password changed successfully');
-    setIsChangingPassword(false);
-    setNewPassword('');
-  };
 
   return (
-    <div className="profile-container">
-      <h2>Profile</h2>
-      {!isEditing && !isChangingPassword && (
-        <div className="profile-info">
-          <p><strong>Name:</strong> {userInfo.name}</p>
-          <p><strong>Email:</strong> {userInfo.email}</p>
-          <button onClick={handleEditProfile}>Edit Profile</button>
-          <button onClick={handleChangePassword}>Change Password</button>
+    <>
+      {
+        !isedit && !iseditpass &&
+          <div className='profile-container'>
+            <p><b>Username: </b> {user.name}</p>
+            <p><b>Email: </b> {user.email}</p>
+            <div className="buttonbox">
+              <button className="button" onClick={(e)=>handleEdit()}>Edit Profile</button>
+              <button className="button" onClick={(e)=>handleEditpass()}>Change Password</button>
+            </div>
+          </div>
+      }
+
+      {
+        isedit &&
+        <div className='profile-container'>
+          <label htmlFor="username">Username:</label>
+          <input type='text' id='username' value={newname} onChange={(e)=>setNewname(e.target.value)}></input>
+          <label htmlFor="email">Email:</label>
+          <input type='text' value={newemail} onChange={(e)=>setNewemail(e.target.value)}></input>
+          <div className="buttonbox">
+            <button className="button" onClick={()=>handleSave()}>Save</button>
+            <button className="button" onClick={()=>handleCancel()}>Cancel</button>
+          </div>
         </div>
-      )}
+      }
 
-      {isEditing && (
-        <form onSubmit={handleSaveProfile}>
-          <label>
-            Name:
-            <input
-              type="text"
-              value={userInfo.name}
-              onChange={(e) => setUserInfo({ ...userInfo, name: e.target.value })}
-            />
-          </label>
-          <label>
-            Email:
-            <input
-              type="email"
-              value={userInfo.email}
-              onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
-            />
-          </label>
-          <button type="submit">Save</button>
-          <button onClick={() => setIsEditing(false)}>Cancel</button>
-        </form>
-      )}
+      {
+        iseditpass &&
+        <div className='profile-container'>
+          <label htmlFor="password">Password:</label>
+          <input type='password' value={newpassword} onChange={(e)=>setNewpassword(e.target.value)}></input>
+          <div className="buttonbox">
+            <button className="button" onClick={()=>handleSavepass()}>Save</button>
+            <button className="button" onClick={()=>handleCancel()}>Cancel</button>
+          </div>
+        </div>
+      }
+    </>
+  )
+}
 
-      {isChangingPassword && (
-        <form onSubmit={handleSavePassword}>
-          <label>
-            New Password:
-            <input
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-          </label>
-          <button type="submit">Save</button>
-          <button onClick={() => setIsChangingPassword(false)}>Cancel</button>
-        </form>
-      )}
-    </div>
-  );
-};
-
-export default Profile;
+export default Profilebody

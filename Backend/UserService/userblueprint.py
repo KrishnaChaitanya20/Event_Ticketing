@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from bson import ObjectId
 from database import mongo
 
 userblueprint = Blueprint('userblueprint', __name__)
@@ -12,8 +13,7 @@ def get_users():
     if search_param:
         users = mongo.db.users.find({
             '$or': [
-                {'name': {'$regex': search_param, '$options': 'i'}},
-                {'description': {'$regex': search_param, '$options': 'i'}}
+                {'name': {'$regex': search_param, '$options': 'i'}}
             ]
         }).skip(start).limit(limit)
     else:
@@ -24,9 +24,6 @@ def get_users():
         user_data = {
             'name': user['name'],
             'email': user['email'],
-            'location': user['location'],
-            'joined_date': user['joined_date'],
-            'description': user['description'],
             'events_attended': user['events_attended']
         }
         if id:
@@ -34,17 +31,16 @@ def get_users():
         user_list.append(user_data)
     return jsonify({'users': user_list})
 
-@userblueprint.route('/find', methods=['POST'])
-def find_user():
-    id= request.json['id']
-    user = mongo.db.users.find_one({'_id': ObjectId(id)})
+@userblueprint.route('/login', methods=['POST'])
+def login():
+    email = request.json['email']
+    password = request.json['password']
+    user = mongo.db.users.find_one({'email': email, 'password': password})
     if user:
         response = {
+            'id': str(user['_id']),
             'name': user['name'],
             'email': user['email'],
-            'location': user['location'],
-            'joined_date': user['joined_date'],
-            'description': user['description'],
             'events_attended': user['events_attended']
         }
         return jsonify(response)
@@ -55,26 +51,23 @@ def find_user():
 def add_user():
     name = request.json['name']
     email = request.json['email']
-    location = request.json['location']
-    joined_date = request.json['joined_date']
-    description = request.json['description']
-    events_attended = request.json['events_attended']
+    password = request.json['password']
     mongo.db.users.insert_one({
         'name': name,
         'email': email,
-        'location': location,
-        'joined_date': joined_date,
-        'description': description,
-        'events_attended': events_attended
+        'password': password,
+        'events_attended': []
     })
     return jsonify({'message': 'User added successfully'})
 
 @userblueprint.route('/updateUser/<id>', methods=['PUT'])
 def update_user(id):
+    print("URL Called with id: "+id)
+    id=ObjectId(id)
     user = mongo.db.users.find_one({'_id': id})
     if user:
         mongo.db.users.update_one({'_id': id}, {'$set': request.json})
-        return jsonify({'message': 'User updated successfully'})
+        return jsonify({'message': 'User updated successfully','status':200})
     else:
         return jsonify({'message': 'User not found'})
 

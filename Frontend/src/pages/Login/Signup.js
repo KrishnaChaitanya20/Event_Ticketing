@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Loginbody.css'
 const Signup = () => {
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -12,13 +13,14 @@ const Signup = () => {
       alert("Passwords do not match");
       return;
     }
-
-    const response = await fetch('/signup', {
+    console.log(username,email,password);
+    console.log(process.env.REACT_APP_API_BASE_URL+'/addUser');
+    const response = await fetch(process.env.REACT_APP_API_BASE_URL+'/users/addUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({"name": username , email , password })
     });
 
     const data = await response.json();
@@ -29,6 +31,16 @@ const Signup = () => {
     <div className="form-container">
       <form onSubmit={handleSubmit}>
         <h2>Signup</h2>
+
+        <label htmlFor="signupUsername">Username:</label>
+        <input
+          type="text"
+          id="signupusername"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+
         <label htmlFor="signupEmail">Email:</label>
         <input
           type="email"
@@ -37,6 +49,7 @@ const Signup = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        
         <label htmlFor="signupPassword">Create Password:</label>
         <input
           type="password"
@@ -53,6 +66,7 @@ const Signup = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
+
         <button type="submit">Signup</button>
       </form>
       <div className="link">
