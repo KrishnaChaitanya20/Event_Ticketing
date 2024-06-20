@@ -43,9 +43,9 @@ def login():
             'email': user['email'],
             'events_attended': user['events_attended']
         }
-        return jsonify(response)
+        return jsonify({"data":response,"status":200})
     else:
-        return jsonify({'message': 'User not found'})
+        return jsonify({'message': 'User not found','status':404})
 
 @userblueprint.route('/addUser', methods=['POST'])
 def add_user():
