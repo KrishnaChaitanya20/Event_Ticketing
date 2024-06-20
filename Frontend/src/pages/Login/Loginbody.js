@@ -4,7 +4,7 @@ import { useLogin } from 'LoginContext';
 import './Loginbody.css';
 
 const Login = () => {
-  const {user,setUser}=useLogin();
+  const {setUser}=useLogin();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate=useNavigate();
