@@ -15,6 +15,22 @@
     grid-gap: 1rem;
 }
 
+.event-card {
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    object-position: center;
+
+}
+
+.event-info {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (min-width: 768px){
   .events-grid{
     grid-template-columns: repeat(3, 1fr);
