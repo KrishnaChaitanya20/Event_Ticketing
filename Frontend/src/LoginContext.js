@@ -6,7 +6,7 @@ const LoginContext = createContext();
 export const useLogin = () => useContext(LoginContext);
 
 export const LoginProvider = ({ children }) => {
-  const [user,setUser]=useState(null);
+  const [user,setUser]=useState();
   return (
     <LoginContext.Provider value={{user,setUser}}>
       {children}
