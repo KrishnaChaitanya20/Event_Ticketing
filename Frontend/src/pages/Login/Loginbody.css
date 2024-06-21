@@ -12,14 +12,14 @@ body, html {
   position: relative;
 }
 
-.admin-login {
+.organizer-login {
   position: absolute;
   top: 0;
   left: 0;
   padding: 10px 20px;
 }
 
-.admin-login a {
+.organizer-login a {
   color: white;
   background-color: #F97053;
   padding: 10px 15px;
@@ -28,8 +28,8 @@ body, html {
   transition: background-color 0.3s;
 }
 
-.admin-login a:hover {
-  background-color: #F97053;
+.organizer-login a:hover {
+  background-color: #ed593b;
 }
 
 .form-container {

@@ -38,8 +38,8 @@ const Login = () => {
 
   return (
     <div className="container">
-      <div className="admin-login">
-        <Link to="/adminlogin">Admin Login</Link>
+      <div className="organizer-login">
+        <Link to="/organizer/login">Organizer Login</Link>
       </div>
       <div className="form-container">
         <form onSubmit={handleSubmit}>

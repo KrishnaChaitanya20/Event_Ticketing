@@ -5,6 +5,7 @@ import logo from 'images/logo.png';
 import { useLogin } from 'LoginContext';
 
 const Navbar = () => {
+  const {isOrganizer} = useLogin();
   const { user } = useLogin();
   return (
     <nav className="navbar">
@@ -17,6 +18,7 @@ const Navbar = () => {
       <ul className="navbar-links">
         <li><Link to="/events">Events</Link></li>
         <li><Link to="/aboutus">About Us</Link></li>
+        {isOrganizer && <li><Link to="/organizer/myevents">My Events</Link></li>}
         <li>{user.name ? <Link to="/profile">{user.name}</Link> : <Link to="/login">login/signup</Link>}</li>
       </ul>
     </nav>
