@@ -3,6 +3,7 @@ from database import mongo
 from EventService.eventblueprint import eventblueprint
 from BookingService.bookingblueprint import bookingblueprint
 from UserService.userblueprint import userblueprint
+from OrganizerService.organizerblueprint import organizerblueprint
 from flask_cors import CORS
 
 import os
@@ -18,6 +19,7 @@ mongo.init_app(app)
 app.register_blueprint(eventblueprint, url_prefix='/events')
 app.register_blueprint(bookingblueprint, url_prefix='/bookings')
 app.register_blueprint(userblueprint, url_prefix='/users')
+app.register_blueprint(organizerblueprint, url_prefix='/organizers')
 
 @app.route('/ping', methods=['GET'])
 def ping():

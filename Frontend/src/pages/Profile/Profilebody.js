@@ -4,7 +4,7 @@ import { useLogin } from 'LoginContext';
 import './Profilebody.css'
 
 const Profilebody = () => {
-  const {user,setUser}=useLogin();
+  const {user,setUser,isOrganizer}=useLogin();
   const [isedit,setIsedit]=useState(false);
   const [iseditpass,setIseditpass]=useState(false);
   const [newname,setNewname]=useState(user.name);
@@ -30,7 +30,10 @@ const Profilebody = () => {
   const handleSave=()=>{
       setIsedit(false);
       const updateInServer=async()=>{
-        const url=process.env.REACT_APP_API_BASE_URL+'/users/updateUser/'+user.id 
+        if(!isOrganizer)
+          var url=process.env.REACT_APP_API_BASE_URL+'/users/updateUser/'+user.id 
+        else
+          var url=process.env.REACT_APP_API_BASE_URL+'/organizers/updateOrganizer/'+user.id
         console.log(url);
         const response=await fetch(url,{
           method:'PUT',

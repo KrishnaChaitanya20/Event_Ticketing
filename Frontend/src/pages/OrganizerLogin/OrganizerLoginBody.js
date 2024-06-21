@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useLogin } from "LoginContext";
 
 const OrganizerLoginBody = () => {
-	const { setOrganizer } = useLogin();
+	const { setUser,setIsOrganizer } = useLogin();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
@@ -29,11 +29,13 @@ const OrganizerLoginBody = () => {
 		}
 		if (data.status === 200) {
 			data = data.data;
-			setOrganizer({
+			setUser({
+				id: data.id,
 				email: data.email,
 				name: data.name,
 				events_hosted: data.events_hosted,
 			});
+			setIsOrganizer(true);
 			navigate("/");
 		} else {
 			alert("Invalid Email or Password");
