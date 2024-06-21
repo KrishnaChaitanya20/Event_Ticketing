@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import './Eventsbody.css';
 import images from 'util/category';
 
@@ -33,13 +33,14 @@ const Eventsbody = () => {
     <div className='events-container'>
       <div className="events-grid">
         {events.map((event, index) => (
+          <Link key={index} className='card-click' to={`/events/${event.id}`}>
           <div
-            key={index}
             className="event-card"
             style={{ backgroundImage: `url(${event.image})` }}
           >
             <div className="event-info">{event.name}</div>
           </div>
+          </Link>
         ))}
       </div>
     </div>

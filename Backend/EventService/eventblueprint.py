@@ -1,12 +1,12 @@
 from flask import Blueprint, request, jsonify
 from database import mongo
+from bson.objectid import ObjectId
 
 eventblueprint = Blueprint('eventblueprint', __name__)
 
 @eventblueprint.route('/', methods=['GET'])
 def get_events():
     search_param = request.args.get('search')
-    id= request.args.get('id',False)
     start = int(request.args.get('start', 0))
     limit = 20
     if search_param:
@@ -21,29 +21,33 @@ def get_events():
 
     event_list = []
     for event in events:
+        if 'image' not in event:
+            event['image'] = 'default'
         event_data = {
+            'id': str(event['_id']),
             'name': event['name'],
             'date': event['date'],
+            'image': event['image'],
             'location': event['location'],
             'entry_fee': event['entry_fee'],
             'description': event['description'],
             'organizer': event['organizer'],
             'capacity': event['capacity']
         }
-        if id:
-            event_data['id'] = str(event['_id'])
         event_list.append(event_data)
     return jsonify({'events': event_list})
     
 
-@eventblueprint.route('/find', methods=['POST'])
-def find_event():
-    id= request.json['id']
+@eventblueprint.route('/find/<id>', methods=['GET'])
+def find_event(id):
     event = mongo.db.events.find_one({'_id': ObjectId(id)})
     if event:
+        if 'image' not in event:
+            event['image'] = 'default'
         response = {
             'name': event['name'],
             'date': event['date'],
+            'image': event['image'],
             'location': event['location'],
             'entry_fee': event['entry_fee'],
             'description': event['description'],
@@ -59,6 +63,7 @@ def find_event():
 def add_event():
     name = request.json['name']
     date = request.json['date']
+    image= request.json['image']
     location = request.json['location']
     entry_fee = request.json['entry_fee']
     description = request.json['description']
@@ -67,6 +72,7 @@ def add_event():
     mongo.db.events.insert_one({
         'name': name,
         'date': date,
+        'image': image,
         'location': location,
         'entry_fee': entry_fee,
         'description': description,

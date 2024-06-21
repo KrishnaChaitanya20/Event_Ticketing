@@ -27,8 +27,8 @@ const Login = () => {
     if(data.status===200)
     {
       data=data.data;
-      setUser({email:data.email,name:data.name,events_attended:data.events_attended});
-      navigate('/');
+      setUser({id:data.id,email:data.email,name:data.name,events_attended:data.events_attended});
+        navigate('/');
     }
     else{
       alert("Invalid Email or Password");

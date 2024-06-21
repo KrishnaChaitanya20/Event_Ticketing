@@ -22,7 +22,7 @@ const EventsByCategories = () => {
       <div className="categories-container">
         {categories.map((category, index) => (
           <div key={index} className="card" style={{ backgroundImage: `url(${category.image})` }}>
-            <div class= "card-content">
+            <div className= "card-content">
               {category.name}  
             </div>
           </div>
