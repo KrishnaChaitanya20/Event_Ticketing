@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams,useNavigate } from 'react-router-dom';
 import './Bookingdetails.css';
+import { useLogin } from 'LoginContext';
 
 const BookingDetails = () => {
   const {eventid}=useParams()
-  
+  const {user}=useLogin()
+  const navigate=useNavigate()
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [numTickets, setNumTickets] = useState(1);
+
+  useEffect(() => {
+    console.log(user);
+    if(!user.name){
+      // Redirect to login page
+      navigate('/login');
+    }
+  }, []);
 
   const event={
     id:eventid,

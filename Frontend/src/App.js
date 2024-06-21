@@ -1,5 +1,6 @@
 import './App.css';
 import { createBrowserRouter,RouterProvider } from 'react-router-dom';
+import { useLogin } from 'LoginContext';
 import HomePage from './pages/Home/HomePage';
 import EventsPage from 'pages/Events/EventsPage';
 import LoginPage from 'pages/Login/LoginPage';
@@ -13,6 +14,8 @@ import OrganizerLogin from 'pages/Organizer/OrganizerLogin';
 import OrganizerSignUp from 'pages/Organizer/OrganizerSignUp';
 import MyEvents from 'pages/Organizer/Myevents';
 function App() {
+  const {user}=useLogin();
+  
   const router = createBrowserRouter([
     {
       path: '/',
@@ -44,7 +47,7 @@ function App() {
     },
     {
       path: "/bookings/:eventid",
-      element: <Bookingpage/>
+      element: user? <Bookingpage/> :<LoginPage/>
     },
     {
       path: "/aboutus",
