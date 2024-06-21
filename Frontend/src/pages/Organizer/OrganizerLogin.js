@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from 'components/Navbar'
-import OrganizerLoginBody from 'pages/OrganizerLogin/OrganizerLoginBody'
+import OrganizerLoginBody from './OrganizerLoginBody'
 
 const OrganizerLogin = () => {
   return (

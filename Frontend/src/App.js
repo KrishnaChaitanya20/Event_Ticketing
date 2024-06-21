@@ -9,9 +9,9 @@ import Profilepage from 'pages/Profile/Profilepage';
 import Bookingpage from 'pages/Booking/Bookingpage';
 import EventPage from 'pages/Event/EventPage';
 import AboutUs from 'pages/Aboutus/About';
-import OrganizerLogin from 'pages/OrganizerLogin/OrganizerLogin';
-import OrganizerSignUp from 'pages/OrganizerLogin/OrganizerSignUp';
-
+import OrganizerLogin from 'pages/Organizer/OrganizerLogin';
+import OrganizerSignUp from 'pages/Organizer/OrganizerSignUp';
+import MyEvents from 'pages/Organizer/Myevents';
 function App() {
   const router = createBrowserRouter([
     {
@@ -57,6 +57,10 @@ function App() {
     {
       path: "/organizer/signup",
       element: <OrganizerSignUp/>
+    },
+    {
+      path: "/organizer/myevents",
+      element: <MyEvents/>
     }
   ]);
   return (

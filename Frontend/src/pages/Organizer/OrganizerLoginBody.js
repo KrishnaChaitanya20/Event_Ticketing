@@ -29,11 +29,12 @@ const OrganizerLoginBody = () => {
 		}
 		if (data.status === 200) {
 			data = data.data;
+			console.log(data);
 			setUser({
 				id: data.id,
 				email: data.email,
 				name: data.name,
-				events_hosted: data.events_hosted,
+				events_organized: data.events_organized,
 			});
 			setIsOrganizer(true);
 			navigate("/");
