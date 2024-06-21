@@ -8,7 +8,7 @@ import AdminLogin from 'pages/Admin/Adminlogin';
 import Profilepage from 'pages/Profile/Profilepage';
 import Bookingpage from 'pages/Booking/Bookingpage';
 import EventPage from 'pages/Event/EventPage';
-import AboutUs from 'pages/Aboutus/AboutusBody';
+import AboutUs from 'pages/Aboutus/About';
 function App() {
   const router = createBrowserRouter([
     {

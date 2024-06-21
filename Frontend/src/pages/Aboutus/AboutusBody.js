@@ -1,6 +1,5 @@
 import React from 'react';
 import './AboutusBody.css';
-
 const AboutUs = () => {
     const managerPhoto='https://img.icons8.com/?size=100&id=31013&format=png&color=000000';
     const teamLeadPhoto='https://img.icons8.com/?size=100&id=31013&format=png&color=000000';
