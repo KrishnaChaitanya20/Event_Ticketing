@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Myevents.css';
 import { useLogin } from 'LoginContext';
-
+import Navbar from 'components/Navbar';
 const MyEvents = () => {
   const [events, setEvents] = useState([]);
   const {user,isOrganizer}=useLogin()

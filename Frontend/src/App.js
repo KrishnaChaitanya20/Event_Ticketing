@@ -13,6 +13,7 @@ import AboutUs from 'pages/Aboutus/About';
 import OrganizerLogin from 'pages/Organizer/OrganizerLogin';
 import OrganizerSignUp from 'pages/Organizer/OrganizerSignUp';
 import MyEvents from 'pages/Organizer/Myevents';
+import AddEvent from 'pages/Organizer/Addevent';
 function App() {
   const {user}=useLogin();
   
@@ -64,6 +65,10 @@ function App() {
     {
       path: "/organizer/myevents",
       element: <MyEvents/>
+    },
+    {
+      path: "/organizer/addevents",
+      element: <AddEvent/>
     }
   ]);
   return (
