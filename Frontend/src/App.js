@@ -67,7 +67,7 @@ function App() {
       element: <MyEvents/>
     },
     {
-      path: "/organizer/addevents",
+      path: "/organizer/addevent",
       element: <AddEvent/>
     }
   ]);

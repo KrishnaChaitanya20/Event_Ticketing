@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from 'components/Navbar';
+import addeventCode  from 'util/AddeventFunc';
 import './Addevent.css';
 
 const AddEvent = () => {
@@ -8,56 +10,87 @@ const AddEvent = () => {
     eventDescription: '',
     eventCategory: '',
     eventDate: '',
-    startTime: '',
-    endTime: '',
-    venueName: '',
-    venueAddress: '',
-    venueCapacity: '',
-    seatingArrangement: '',
-    organizerName: '',
-    organizerContact: '',
-    organizerBio: '',
-    ticketTypes: '',
-    ticketPrices: '',
-    ticketAvailability: '',
-    ticketSaleDates: '',
+    capacity: 0,
+    entry_fee: 0,
+    location:{
+                venueName: '',
+                venueAddress: '',
+              },
+    organizerDetails:{
+                organizerName: '',
+                organizerContact: '',
+              },
     eventImage: '',
-    eventLogo: '',
-    promotionalVideos: '',
-    socialMediaLinks: '',
-    eventSchedule: '',
-    guestSpeakers: '',
-    sponsors: '',
-    accessibilityInfo: '',
-    ageRestrictions: ''
   });
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+  const { name, value } = e.target;
+  if (name === "venueName" || name === "venueAddress") {
     setEventDetails({
       ...eventDetails,
-      [name]: value
+      location: {
+        ...eventDetails.location,
+        [name]: value,
+      },
     });
-  };
+  } else if (name === "organizerName" || name === "organizerContact") {
+    // Handle updates to organizerDetails
+    setEventDetails({
+      ...eventDetails,
+      organizerDetails: {
+        ...eventDetails.organizerDetails,
+        [name]: value,
+      },
+    });
+  } else {
+    setEventDetails({
+      ...eventDetails,
+      [name]: value,
+    });
+  }
+};
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
     setEventDetails({
       ...eventDetails,
-      [name]: files[0] // Assuming single file upload, you can adjust for multiple files
+      [name]: files[0]
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you can handle the form submission, like sending the data to a server
-    console.log('Event Details:', eventDetails);
-    navigate('/events');
+    const formData = new FormData();
+    formData.append('eventImage', eventDetails.eventImage);
+  
+    if (eventDetails && typeof eventDetails === 'object') {
+      Object.keys(eventDetails).forEach(key => {
+        if (key === 'location') {
+          formData.append('venueName', eventDetails.location.venueName);
+          formData.append('venueAddress', eventDetails.location.venueAddress);
+        } else if (key === 'organizerDetails') {
+          formData.append('organizerName', eventDetails.organizerDetails.organizerName);
+          formData.append('organizerContact', eventDetails.organizerDetails.organizerContact);
+        }
+        else {
+          formData.append(key, eventDetails[key]);
+        }
+      });
+    }
+    
+    const status=addeventCode(formData);
+    if(status===200)
+    {
+      alert("Event Added Successfully");
+    }
+    // navigate('/events');
   };
 
   return (
+    <>
+    <Navbar />
     <div className="add-event-container">
       <h1>Add New Event</h1>
       <form onSubmit={handleSubmit}>
@@ -72,12 +105,17 @@ const AddEvent = () => {
             <textarea name="eventDescription" value={eventDetails.eventDescription} onChange={handleChange} />
           </label>
           <label>
+            Entry Fee:
+            <input type="number" name="entry_fee" value={eventDetails.entry_fee} onChange={handleChange} />
+          </label>
+          <label>
             Event Category:
             <select name="eventCategory" value={eventDetails.eventCategory} onChange={handleChange}>
               <option value="">Select Category</option>
+              <option value="Art">Art</option>
               <option value="Music">Music</option>
+              <option value="Food">Food</option>
               <option value="Sports">Sports</option>
-              <option value="Education">Education</option>
               <option value="Technology">Technology</option>
               <option value="Health">Health</option>
             </select>
@@ -85,18 +123,18 @@ const AddEvent = () => {
         </section>
 
         <section>
-          <h2>Date and Time</h2>
+          <h2>Event Image</h2>
+          <label>
+            Event Image:
+            <input type="file" name="eventImage" onChange={handleFileChange} />
+          </label>
+        </section>
+
+        <section>
+          <h2>Date</h2>
           <label>
             Event Date:
             <input type="date" name="eventDate" value={eventDetails.eventDate} onChange={handleChange} />
-          </label>
-          <label>
-            Start Time:
-            <input type="time" name="startTime" value={eventDetails.startTime} onChange={handleChange} />
-          </label>
-          <label>
-            End Time:
-            <input type="time" name="endTime" value={eventDetails.endTime} onChange={handleChange} />
           </label>
         </section>
 
@@ -104,19 +142,15 @@ const AddEvent = () => {
           <h2>Venue Information</h2>
           <label>
             Venue Name:
-            <input type="text" name="venueName" value={eventDetails.venueName} onChange={handleChange} />
+            <input type="text" name="venueName" value={eventDetails.location.venueName} onChange={handleChange} />
           </label>
           <label>
             Venue Address:
-            <input type="text" name="venueAddress" value={eventDetails.venueAddress} onChange={handleChange} />
+            <input type="text" name="venueAddress" value={eventDetails.location.venueAddress} onChange={handleChange} />
           </label>
           <label>
             Venue Capacity:
-            <input type="number" name="venueCapacity" value={eventDetails.venueCapacity} onChange={handleChange} />
-          </label>
-          <label>
-            Seating Arrangement:
-            <input type="text" name="seatingArrangement" value={eventDetails.seatingArrangement} onChange={handleChange} />
+            <input type="number" name="capacity" value={eventDetails.capacity} onChange={handleChange} />
           </label>
         </section>
 
@@ -124,85 +158,18 @@ const AddEvent = () => {
           <h2>Organizer Information</h2>
           <label>
             Organizer Name:
-            <input type="text" name="organizerName" value={eventDetails.organizerName} onChange={handleChange} />
+            <input type="text" name="organizerName" value={eventDetails.organizerDetails.organizerName} onChange={handleChange} />
           </label>
           <label>
             Organizer Contact Information:
-            <input type="text" name="organizerContact" value={eventDetails.organizerContact} onChange={handleChange} />
-          </label>
-          <label>
-            Organizer Bio:
-            <textarea name="organizerBio" value={eventDetails.organizerBio} onChange={handleChange} />
-          </label>
-        </section>
-
-        <section>
-          <h2>Ticket Information</h2>
-          <label>
-            Ticket Types:
-            <input type="text" name="ticketTypes" value={eventDetails.ticketTypes} onChange={handleChange} />
-          </label>
-          <label>
-            Ticket Prices:
-            <input type="text" name="ticketPrices" value={eventDetails.ticketPrices} onChange={handleChange} />
-          </label>
-          <label>
-            Ticket Availability:
-            <input type="number" name="ticketAvailability" value={eventDetails.ticketAvailability} onChange={handleChange} />
-          </label>
-          <label>
-            Ticket Sale Dates:
-            <input type="text" name="ticketSaleDates" value={eventDetails.ticketSaleDates} onChange={handleChange} />
-          </label>
-        </section>
-
-        <section>
-          <h2>Media and Marketing</h2>
-          <label>
-            Event Image:
-            <input type="file" name="eventImage" onChange={handleFileChange} />
-          </label>
-          <label>
-            Event Logo:
-            <input type="file" name="eventLogo" onChange={handleFileChange} />
-          </label>
-          <label>
-            Promotional Videos:
-            <input type="file" name="promotionalVideos" onChange={handleFileChange} />
-          </label>
-          <label>
-            Social Media Links:
-            <input type="file" name="socialMediaLinks" onChange={handleFileChange} />
-          </label>
-        </section>
-
-        <section>
-          <h2>Additional Details</h2>
-          <label>
-            Event Schedule:
-            <textarea name="eventSchedule" value={eventDetails.eventSchedule} onChange={handleChange} />
-          </label>
-          <label>
-            Guest Speakers/Performers:
-            <textarea name="guestSpeakers" value={eventDetails.guestSpeakers} onChange={handleChange} />
-          </label>
-          <label>
-            Sponsors:
-            <textarea name="sponsors" value={eventDetails.sponsors} onChange={handleChange} />
-          </label>
-          <label>
-            Accessibility Information:
-            <textarea name="accessibilityInfo" value={eventDetails.accessibilityInfo} onChange={handleChange} />
-          </label>
-          <label>
-            Age Restrictions:
-            <input type="text" name="ageRestrictions" value={eventDetails.ageRestrictions} onChange={handleChange} />
+            <input type="text" name="organizerContact" value={eventDetails.organizerDetails.organizerContact} onChange={handleChange} />
           </label>
         </section>
 
         <button type="submit">Add Event</button>
       </form>
     </div>
+    </>
   );
 };
 

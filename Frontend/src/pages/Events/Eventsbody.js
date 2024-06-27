@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import './Eventsbody.css';
-import images from 'util/category';
-
-// Placeholder data for events with a placeholder image
-
 
 const Eventsbody = () => {
   const [searchParams] = useSearchParams();
   const [events, setEvents] = React.useState([]);
   useEffect(() => {
     const search=searchParams.get('search');
+    const type=searchParams.get('type');
     const getEvents = async () => {
       try {
         if (search)
           var url = `http://localhost:5000/events?search=${search}`;
+        else if (type)
+          var url = `http://localhost:5000/events?category=${type}`;
         else
           var url = 'http://localhost:5000/events';
 

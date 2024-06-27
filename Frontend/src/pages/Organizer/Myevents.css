@@ -6,6 +6,11 @@
   .my-events h2 {
     margin-bottom: 20px;
   }
+  .myevents-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
   
   .event-card {
     display: flex;
