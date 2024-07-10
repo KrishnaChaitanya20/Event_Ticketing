@@ -33,7 +33,7 @@ const MyEvents = () => {
               </div>
               <div className="event-details">
                 <h3>{event.name}</h3>
-                <p>{new Date(event.date).toLocaleDateString()}</p>
+                <p>{new Date(event.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
                 <p>{event.description}</p>
               </div>
             </div>
