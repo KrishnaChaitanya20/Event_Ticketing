@@ -8,6 +8,25 @@ eventblueprint = Blueprint('eventblueprint', __name__)
 
 ############################################################################################################
 
+
+def get_img(img_name):
+    try:
+        img = base64.b64encode(open('Images/'+img_name, 'rb').read()).decode('utf-8')
+    except:
+        img = ''
+    return img
+
+
+
+def secure_filename(filename):
+    uuid=str(ObjectId())
+    filename=uuid+"-"+filename.replace(" ","_")
+    print("filename",filename)
+    return filename
+
+
+############################################################################################################
+
 @eventblueprint.route('/', methods=['GET'])
 def get_events():
     search_param = request.args.get('search')
@@ -32,7 +51,8 @@ def get_events():
     for event in events:
         if 'image' not in event:
             event['image'] = 'default'
-        img = base64.b64encode(open('Images/'+event['image'], 'rb').read()).decode('utf-8')
+        img = get_img(event['image'])
+
         event_data = {
             'id': str(event['_id']),
             'name': event['name'],
@@ -57,7 +77,7 @@ def get_upcomming_events():
     for event in events:
         if 'image' not in event:
             event['image'] = 'default'
-        img = base64.b64encode(open('Images/'+event['image'], 'rb').read()).decode('utf-8')
+        img = get_img(event['image'])
         event_data = {
             'id': str(event['_id']),
             'name': event['name'],
@@ -81,7 +101,7 @@ def find_event(id):
     if event:
         if 'image' not in event:
             event['image'] = 'default'
-        img = base64.b64encode(open('Images/'+event['image'], 'rb').read()).decode('utf-8')
+        img = get_img(event['image'])
         response = {
             'id': str(event['_id']),
             'name': event['name'],
@@ -99,14 +119,6 @@ def find_event(id):
         return jsonify({'message': 'Event not found'})
     
 ############################################################################################################
-
-def secure_filename(filename):
-    uuid=str(ObjectId())
-    filename=uuid+"-"+filename.replace(" ","_")
-    print("filename",filename)
-    return filename
-
-
 
 @eventblueprint.route('/addEvent', methods=['POST'])
 def add_event():
@@ -167,12 +179,19 @@ def update_event(id):
         return jsonify({'message': 'Event updated successfully'})
     else:
         return jsonify({'message': 'Event not found'})
-    
+
+############################################################################################################    
     
 @eventblueprint.route('/deleteEvent/<id>', methods=['DELETE'])
 def delete_event(id):
     event = mongo.db.events.find_one({'_id': id})
     if event:
+        if 'image' in event:
+            image_filename = event['image']
+            image_path = 'Images/'+ image_filename
+            if os.path.exists(image_path):
+                os.remove(image_path)
+        
         mongo.db.events.delete_one({'_id': id})
         return jsonify({'message': 'Event deleted successfully'})
     else:
