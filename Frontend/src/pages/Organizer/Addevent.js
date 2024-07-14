@@ -79,13 +79,20 @@ const AddEvent = () => {
         }
       });
     }
-    
-    const status=addeventCode(formData);
-    if(status===200)
-    {
-      alert("Event Added Successfully");
-    }
-    // navigate('/events');
+    const addevent = async () => {
+      try {
+      const status = await addeventCode(formData);
+      console.log(status);
+      if (status === 200) {
+        alert("Event Added Successfully");
+        console.log("Event Added Successfully");
+      }
+      navigate('/events');
+      } catch (error) {
+      console.error(error);
+      }
+    };
+    addevent();
   };
 
   return (

@@ -35,7 +35,7 @@ const Eventsbody = () => {
           <Link key={index} className='card-click' to={`/events/${event.id}`}>
           <div
             className="event-card"
-            style={{ backgroundImage: `url(${event.image})` }}
+            style={{ backgroundImage: `url(${'data:image/'+event.image_ext+';base64,'+event.image})` }}
           >
             <div className="event-info">{event.name}</div>
           </div>

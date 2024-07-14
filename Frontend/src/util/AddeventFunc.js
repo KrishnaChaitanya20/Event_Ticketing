@@ -4,6 +4,7 @@ const addeventCode = async (event) => {
         body: event
     })
     const data = await response.json();
+    console.log(data);
     return data.status
 }
 

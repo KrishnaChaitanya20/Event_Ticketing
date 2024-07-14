@@ -45,7 +45,7 @@ return (
                                     {event.location.venueAddress}
                             </div>
                     </div>
-                    <img className="eventimage" src={event.image} alt="Event" />
+                    <img className="eventimage" src={'data:image/'+event.image_ext+';base64,'+event.image} alt="Event" />
 
                     <div className="event-description">
                             {event.description}
