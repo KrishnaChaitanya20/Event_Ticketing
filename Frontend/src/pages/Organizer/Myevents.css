@@ -5,6 +5,7 @@
   
   .my-events h2 {
     margin-bottom: 20px;
+    color: #fff;
   }
   .myevents-grid{
     display: grid;
@@ -17,7 +18,8 @@
     align-items: center;
     margin-bottom: 20px;
     padding: 10px;
-    border: 1px solid #ddd;
+    background: rgba(0, 0, 0, 0.2);
+    /* border: 1px solid #ddd; */
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -45,8 +47,8 @@
     font-weight: bold;
   }
   
-  .event-details p {
+ p {
     margin: 5px 0;
-    color: #555;
+    color: #aaa;
   }
   
