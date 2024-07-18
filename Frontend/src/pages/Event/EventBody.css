@@ -1,11 +1,14 @@
 
 .event-container{
-    margin: 1em;
+    margin: auto;
+    width: 90%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: #fff;
+    background: rgba(0,0,0,0.2);
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
 }
 

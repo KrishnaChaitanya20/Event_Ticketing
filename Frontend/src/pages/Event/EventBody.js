@@ -23,53 +23,59 @@ const EventBody = () => {
     }
 
 return (
-    <>
-    {event ?
-            <div className='event-container'>
-                    <div className="event-share">
-                            <div>
-                                    <div className="event-name" >{event.name}</div>
-                                    <div className="event-category">{event.category}</div>
-                            </div>
-                            <div className="share">Share</div>
-                    </div>
-                    <div className='venue'>
-                            <div className="event-date">{event.date}</div>
-                            {/* <div className="event-time">{event.time}</div> */}
-                            <div className="event-location">
-                                    <span>Venue: </span>
-                                    {event.location.venueName}
-                            </div>
-                            <div className="event-address">
-                                    <span>Address: </span>
-                                    {event.location.venueAddress}
-                            </div>
-                    </div>
-                    <img className="eventimage" src={'data:image/'+event.image_ext+';base64,'+event.image} alt="Event" />
+	<>
+	{event ?
+		<div className='event-container'>
+			<div className="event-share">
+				<div>
+					<div className="event-name" >{event.name}</div>
+					<div className="event-category">{event.category}</div>
+				</div>
+				<div className="share">Share</div>
+			</div>
+			<div className='venue'>
+				<div className="event-date">{event.date}</div>
+				{/* <div className="event-time">{event.time}</div> */}
+				<div className="event-location">
+					<span>Venue: </span>
+					{event.location.venueName}
+				</div>
+				<div className="event-address">
+					<span>Address: </span>
+					{event.location.venueAddress}
+				</div>
+			</div>
 
-                    <div className="event-description">
-                            {event.description}
-                    </div>
-                    {event.organizer ?
-                            <div className="event-organizer">
-                                    <div className="organizer">Organizer Details</div>
-                                    <div className="details">
-                                            <div className="organizer-name">
-                                                    <span>Organizer name: </span>
-                                                    {event.organizer.name}
-                                            </div>
-                                            <div className="organizer-email">
-                                                    <span>Organizer email: </span>
-                                                    {event.organizer.email}
-                                            </div>
-                                    </div>
-                            </div>
-                    : null}
-                    <input type="button" onClick={()=>handleBook()} value="Book Now" className="booknow" />
-            </div>
-            : <div className='loading'>Loading...</div>
-    }
-    </>
+		{
+			event.image==='default'?
+			<img src={`https://via.placeholder.com/150?text=${event.name}`} alt={event.name} />
+			:<img className="eventimage" src={'data:image/'+event.image_ext+';base64,'+event.image} alt="Event" />
+		}
+
+
+			<div className="event-description">
+				{event.description}
+			</div>
+			{event.organizer ?
+				<div className="event-organizer">
+					<div className="organizer">Organizer Details</div>
+					<div className="details">
+						<div className="organizer-name">
+							<span>Organizer name: </span>
+							{event.organizer.name}
+						</div>
+						<div className="organizer-email">
+							<span>Organizer email: </span>
+							{event.organizer.email}
+						</div>
+					</div>
+				</div>
+			: null}
+			<input type="button" onClick={()=>handleBook()} value="Book Now" className="booknow" />
+		</div>
+		: <div className='loading'>Loading...</div>
+	}
+	</>
 )
 }
 

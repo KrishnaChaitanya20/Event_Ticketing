@@ -9,13 +9,14 @@ const Eventsbody = () => {
     const search=searchParams.get('search');
     const type=searchParams.get('type');
     const getEvents = async () => {
+      const base_url=process.env.REACT_APP_API_BASE_URL;
       try {
         if (search)
-          var url = `http://localhost:5000/events?search=${search}`;
+          var url = `${base_url}/events?search=${search}`;
         else if (type)
-          var url = `http://localhost:5000/events?category=${type}`;
+          var url = `${base_url}/events?category=${type}`;
         else
-          var url = 'http://localhost:5000/events';
+          var url = `${base_url}/events`;
 
         const response = await fetch(url);
         const data = await response.json();
@@ -35,7 +36,11 @@ const Eventsbody = () => {
           <Link key={index} className='card-click' to={`/events/${event.id}`}>
           <div
             className="event-card"
-            style={{ backgroundImage: `url(${'data:image/'+event.image_ext+';base64,'+event.image})` }}
+            style={{
+              backgroundImage: event.image === 'default'
+                ? `url(https://via.placeholder.com/150?text=${event.name})`
+                : `url(data:image/${event.image_ext};base64,${event.image})`
+            }}
           >
             <div className="event-info">{event.name}</div>
           </div>

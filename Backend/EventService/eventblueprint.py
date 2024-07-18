@@ -13,7 +13,7 @@ def get_img(img_name):
     try:
         img = base64.b64encode(open('Images/'+img_name, 'rb').read()).decode('utf-8')
     except:
-        img = ''
+        img = 'default'
     return img
 
 
