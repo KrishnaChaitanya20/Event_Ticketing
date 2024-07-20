@@ -3,6 +3,8 @@ const  upcomming = async () => {
         method: 'GET'
     })
     const data = await response.json();
-    console.log(data);
-    return data.status
+    // console.log(data);
+    return data
 }
+
+export default upcomming;

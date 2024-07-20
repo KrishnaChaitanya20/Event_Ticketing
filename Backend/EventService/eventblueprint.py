@@ -3,6 +3,7 @@ from flask import Blueprint, request, jsonify
 from database import mongo
 from bson.objectid import ObjectId
 import os
+from datetime import datetime
 
 eventblueprint = Blueprint('eventblueprint', __name__)
 
@@ -50,7 +51,7 @@ def get_events():
     event_list = []
     for event in events:
         if 'image' not in event:
-            event['image'] = 'default'
+            img = 'default'
         img = get_img(event['image'])
 
         event_data = {
@@ -72,9 +73,21 @@ def get_events():
 
 @eventblueprint.route('/upcomming', methods=['GET'])
 def get_upcomming_events():
-    events = mongo.db.events.find().sort('date', 1).limit(3)
-    event_list = []
+    today = datetime.now().date()
+    events = mongo.db.events.find().limit(100)
+    
+    upcoming_events = []
     for event in events:
+        event_date = datetime.strptime(event['date'], "%Y-%m-%d").date()
+        if event_date >= today:
+            upcoming_events.append(event)
+    
+    upcoming_events.sort(key=lambda x: datetime.strptime(x['date'], "%Y-%m-%d").date(), reverse=True)
+
+    top_3_upcoming_events = upcoming_events[:3]
+    
+    event_list = []
+    for event in top_3_upcoming_events:
         if 'image' not in event:
             event['image'] = 'default'
         img = get_img(event['image'])
@@ -84,13 +97,9 @@ def get_upcomming_events():
             'date': event['date'],
             'image': img,
             'image_ext': event['image'].split('.')[-1],
-            'location': event['location'],
-            'entry_fee': event['entry_fee'],
-            'description': event['description'],
-            'organizer': event['organizer'],
-            'capacity': event['capacity']
         }
         event_list.append(event_data)
+    
     return jsonify({'events': event_list})
 
 ############################################################################################################
@@ -123,6 +132,10 @@ def find_event(id):
 @eventblueprint.route('/addEvent', methods=['POST'])
 def add_event():
     print("called add event")
+    date = request.form.get('eventDate')
+    date=datetime.strptime(date, "%Y-%m-%d").date()
+    if date < datetime.now().date():
+        return jsonify({'message': 'Invalid date', 'status': 400}), 400
     img = request.files.get('eventImage')
     if img:
         filename = secure_filename(img.filename)

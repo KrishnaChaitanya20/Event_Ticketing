@@ -81,15 +81,18 @@ const AddEvent = () => {
     }
     const addevent = async () => {
       try {
-      const status = await addeventCode(formData);
-      console.log(status);
-      if (status === 200) {
+      const res = await addeventCode(formData);
+      console.log(res.status);
+      if (res.status === 200) {
         alert("Event Added Successfully");
         console.log("Event Added Successfully");
+        navigate('/events');
       }
-      navigate('/events');
+      else{
+        alert(res.message);
+      }
       } catch (error) {
-      console.error(error);
+        console.error(error);
       }
     };
     addevent();

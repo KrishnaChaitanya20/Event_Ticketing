@@ -1,38 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
-import './Bookingdetails.css';
 import { useLogin } from 'LoginContext';
+import geteventbyid from 'util/EventById'
+import './Bookingdetails.css';
 
 const BookingDetails = () => {
   const {eventid}=useParams()
+  const [event, setEvent] = useState({'name':"Event"})
   const {user}=useLogin()
   const navigate=useNavigate()
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [numTickets, setNumTickets] = useState(1);
 
+
   useEffect(() => {
-    console.log(user);
     if(!user.name){
-      // Redirect to login page
       navigate('/login');
+    }
+    else{
+      const fetchData = async () => {
+        const data=await geteventbyid(eventid);
+        setEvent(data);
+      };
+      fetchData();
     }
   }, []);
 
-  const event={
+  
+
+  const event1={
     id:eventid,
     name:"Concert",
     date:"2022-12-12",
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Replace with actual booking logic
-    // alert(`Booked ${numTickets} tickets for ${event.name}`);
+    alert(`Booking Confirmed for ${numTickets} tickets`);
+    navigate(`/`);
   };
 
   return (
     <div className="booking-container">
-      <h2>Booking Details for {event.name}</h2>
+      <h2>Booking Details for {event?.name}</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Name:

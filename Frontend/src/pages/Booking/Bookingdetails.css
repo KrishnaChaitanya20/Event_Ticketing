@@ -12,7 +12,10 @@ body, html {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
   }
-  
+  .booking-container h2{
+    text-align: center;
+    color: #000;
+  }
   form {
     display: flex;
     flex-direction: column;
@@ -20,6 +23,7 @@ body, html {
   
   form label {
     margin-bottom: 10px;
+    color: #000;
   }
   
   form input {
