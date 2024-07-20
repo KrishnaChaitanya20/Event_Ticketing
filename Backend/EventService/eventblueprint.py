@@ -106,7 +106,10 @@ def get_upcomming_events():
 
 @eventblueprint.route('/find/<id>', methods=['GET'])
 def find_event(id):
-    event = mongo.db.events.find_one({'_id': ObjectId(id)})
+    try:
+        event = mongo.db.events.find_one({'_id': ObjectId(id)})
+    except:
+        return jsonify({'message': 'Invalid ID', 'status': 400}), 400
     if event:
         if 'image' not in event:
             event['image'] = 'default'
@@ -123,9 +126,9 @@ def find_event(id):
             'organizer': event['organizer'],
             'capacity': event['capacity']
         }
-        return jsonify(response)
+        return jsonify({'response':response,'status':200})
     else:
-        return jsonify({'message': 'Event not found'})
+        return jsonify({'message': 'Event not found', 'status': 404})
     
 ############################################################################################################
 

@@ -8,12 +8,31 @@ import './EventBody.css'
 const EventBody = () => {
     const { id } = useParams()
     const navigate = useNavigate();
-    const [event, setEvent] = useState();
+    const [event, setEvent] = useState({
+		name: '',
+		category: '',
+		date: '',
+		time: '',
+		location: {
+			venueName: '',
+			venueAddress: ''
+		},
+		image: '',
+		description: '',
+		organizer: {
+			name: '',
+			email: ''
+		}
+	});
 
     useEffect(() => {
         const fetchData = async () => {
             const data=await geteventbyid(id);
-            setEvent(data);
+			if(data.status !== 200 ){
+				alert(data.message);
+				navigate('/events');
+			}
+            setEvent(data.response);
         };
         fetchData();
     }, [id]);
