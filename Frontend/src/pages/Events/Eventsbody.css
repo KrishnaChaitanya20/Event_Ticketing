@@ -1,0 +1,63 @@
+.events-container{
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.events-grid{
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    padding: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+}
+
+.event-card {
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    object-position: center;
+
+}
+
+.event-info {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 768px){
+  .events-grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.events-grid .event-card{
+    display: flex;
+    flex-direction: column;
+    /* background-color: #f5f5f5; */
+    aspect-ratio: 1/1;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-click{
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.booknow{
+  background-color: red;
+  color: #000;
+  border: 1px solid #000;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}

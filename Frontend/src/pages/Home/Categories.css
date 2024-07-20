@@ -1,0 +1,86 @@
+/* EventsByCategories.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  }
+  
+  .header-box {
+    /* background-color: #e0e0e0; */
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, .7);
+    background: rgba(0, 0, 0, .3);
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
+  }
+  
+  .header-box h2{
+    color: white;
+  }
+  .categories-container {
+    min-width: 80%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:1rem;
+  }
+  
+  .card {
+    width: 100%; /* Two cards per row, with gap */
+    margin: 8px 0; /* Vertically centers the cards when there are only two */
+    /* padding: 16px; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 2rem;
+    opacity: 1;
+  }
+  
+  .card-content {
+    background-color: rgba(0, 0, 0, 0);
+    width: 100%; /* Two cards per row, with gap */
+    margin: 8px 0; /* Vertically centers the cards when there are only two */
+    /* padding: 16px; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 2rem;
+    opacity: 0;
+    transition: 0.2s ease;
+  }
+
+  .card:hover .card-content{
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 1;
+  }
+
+  @media (max-width: 425px) {
+    .categories-container{
+      grid-template-columns: repeat(1,1fr);
+    }
+  }
+  
+  
+  /* @media (max-width: 480px) {
+    .card {
+      flex: 1 1 calc(100% - 32px);
+    }
+  } */
+  

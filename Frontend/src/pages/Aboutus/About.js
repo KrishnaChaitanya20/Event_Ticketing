@@ -1,13 +1,13 @@
 import React from "react";
+import AboutUs from "./AboutusBody";
 import Navbar from "components/Navbar";
-import AdminLogin from "./Adminlogin";
-const Admin = () => {
+const Aboutus = () => {
     return ( 
         <div>
             <Navbar/>
-            <AdminLogin/>
+            <AboutUs/>
         </div>
      );
 }
  
-export default Admin;
+export default Aboutus;

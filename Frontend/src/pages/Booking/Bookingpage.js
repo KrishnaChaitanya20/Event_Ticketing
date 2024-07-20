@@ -1,13 +1,13 @@
 import React from "react";
+import BookingDetails from "./Bookingdetails";
 import Navbar from "components/Navbar";
-import AdminLogin from "./Adminlogin";
-const Admin = () => {
+const Bookingpage = () => {
     return ( 
         <div>
             <Navbar/>
-            <AdminLogin/>
+            <BookingDetails/>
         </div>
      );
 }
  
-export default Admin;
+export default Bookingpage;

@@ -1,0 +1,23 @@
+/* SortFilter.css */
+
+.sort-filter {
+    display: flex;
+    gap: 16px;
+    margin-right: 16px;
+  }
+  
+  .sort, .filter {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sort label, .filter label {
+    margin-bottom: 4px;
+  }
+  
+  .sort select, .filter select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  

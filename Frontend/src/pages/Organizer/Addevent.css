@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.add-event-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+section label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #fff;
+}
+.add-event-container{
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
+  input[type="number"],
+  select,
+  textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 95%;
+  }
+}
+input[type="file"] {
+  padding: 5px;
+}
+
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 95%;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+button[type="submit"] {
+  background-color: #F97053;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #e96045;
+}
