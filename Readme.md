@@ -1,6 +1,6 @@
 # Event Ticketing
 
-This project is an event booking website built with Python for the frontend, Flask for the backend, and MongoDB for the database. The backend code can be found in the `Backend` folder, while the frontend code is located in the `Frontend` folder.
+This project is an event booking website built with React for the frontend, Flask for the backend, and MongoDB for the database. The backend code can be found in the `Backend` folder, while the frontend code is located in the `Frontend` folder.
 
 ## Installation
 
