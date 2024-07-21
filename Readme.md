@@ -37,7 +37,7 @@ This project is an event booking website built with React for the frontend, Flas
     3. Start the backend server:
 
         ```bash
-        python backend.py
+        python app.py
         ```
 
     ### Part 2: Starting the frontend server
@@ -60,7 +60,7 @@ This project is an event booking website built with React for the frontend, Flas
         npm start
         ```
 
-3. Access the website in your browser at `http://localhost:5000`.
+3. Access the website in your browser at `http://localhost:3000`.
 
 ## Contributing
 
