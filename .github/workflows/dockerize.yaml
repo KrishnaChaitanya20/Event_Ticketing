@@ -1,0 +1,19 @@
+name: Build Docker Image
+on:
+  push:
+    branches:
+      - 'actions'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build ./Backend --tag ET-Backend:$(date +%s)
+
+      - name: Print Docker images
+        run: docker images
