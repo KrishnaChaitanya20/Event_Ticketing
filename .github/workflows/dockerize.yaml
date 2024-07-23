@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker image
-        run: docker build ./Backend --tag ET-Backend:$(date +%s)
+        run: docker build ./Backend --tag et-backend:$(date +%s)
 
       - name: Print Docker images
         run: docker images
