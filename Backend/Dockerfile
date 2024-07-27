@@ -10,4 +10,6 @@ COPY . .
 
 EXPOSE 5000
 
-CMD [ "waitress-serve", "--port=5000", "app:app"]
+ENTRYPOINT [ "waitress-serve" ]
+
+CMD [ "--port=5000", "wsgi:app"]
