@@ -1,4 +1,4 @@
-name: Build Docker Image
+name: Build Docker Image for Frontend
 
 on:
   push:
@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      REPOSITORY: ${{ secrets.DOCKER_USERNAME }}/et-backend
+      REPOSITORY: ${{ secrets.DOCKER_USERNAME }}/et-frontend
 
     steps:
       - name: Checkout repository
@@ -23,7 +23,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build ./Backend --tag ${{ env.REPOSITORY }}:latest
+          docker build ./Frontend --tag ${{ env.REPOSITORY }}:latest
           docker tag ${{ env.REPOSITORY }}:latest ${{ env.REPOSITORY }}:${{ github.run_number }}
 
       - name: Push Docker image to Docker Hub
