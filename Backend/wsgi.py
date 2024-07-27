@@ -24,7 +24,3 @@ app.register_blueprint(organizerblueprint, url_prefix='/organizers')
 @app.route('/ping', methods=['GET'])
 def ping():
     return jsonify({'response': 'pong!'})
-
-if __name__ == '__main__':
-    serve(app, host='0.0.0.0', port=5000)
-    
