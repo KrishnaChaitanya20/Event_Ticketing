@@ -1,0 +1,27 @@
+services:
+  db:
+    image: mongo
+    # container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: pass
+    # volumes:
+    #   - ./data:/data/db
+  backend:
+    image: krishnachaitanya26/et-backend:latest
+    # container_name: et-backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      MONGO_URI: mongodb://root:pass@db:27017/et
+  frontend:
+    image: krishnachaitanya26/et-frontend:latest
+    # container_name: et-frontend
+    ports:
+      - "80:80"
+    environment:
+      REACT_APP_API_URL: http://localhost:5000

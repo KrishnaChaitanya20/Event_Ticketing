@@ -1,9 +1,7 @@
 name: Build Docker Image for Backend
 
 on:
-  push:
-    branches:
-      - 'actions'
+  workflow_dispatch:
 
 jobs:
   build:

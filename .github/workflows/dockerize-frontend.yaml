@@ -1,9 +1,7 @@
 name: Build Docker Image for Frontend
 
 on:
-  push:
-    branches:
-      - 'actions'
+  workflow_dispatch:
 
 jobs:
   build:
