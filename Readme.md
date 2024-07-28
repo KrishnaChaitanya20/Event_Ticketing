@@ -14,6 +14,9 @@ This project is an event booking website built with React for the frontend, Flas
 
     - Install MongoDB and start the MongoDB service.
     - Create a new database named `event_ticketing`.
+
+3. Update the environment variables:
+
     - In `Backend` folder rename `.env.example` to `.env`
     - Update the database connection details in the `.env` file.
     - In `Frontend` folder rename `.env.example` to `.env`
