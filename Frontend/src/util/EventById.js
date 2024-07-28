@@ -1,5 +1,7 @@
+import config from 'config'
+
 const geteventbyid = async (id) => {
-    const response = await fetch(process.env.REACT_APP_API_BASE_URL+"/events/find/"+id,{
+    const response = await fetch(config.apiBaseUrl+"/events/find/"+id,{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

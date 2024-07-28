@@ -1,5 +1,7 @@
+import config from 'config'
+
 const  upcomming = async () => {
-    const response = await fetch(process.env.REACT_APP_API_BASE_URL+"/events/upcomming",{
+    const response = await fetch(config.apiBaseUrl+"/events/upcomming",{
         method: 'GET'
     })
     const data = await response.json();

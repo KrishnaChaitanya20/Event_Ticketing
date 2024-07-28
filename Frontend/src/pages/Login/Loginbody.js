@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import { useLogin } from 'LoginContext';
+import config from 'config';
 import './Loginbody.css';
 
 const Login = () => {
@@ -10,7 +11,7 @@ const Login = () => {
   const navigate=useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(process.env.REACT_APP_API_BASE_URL+'/users/login', {
+    const response = await fetch(config.apiBaseUrl+'/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

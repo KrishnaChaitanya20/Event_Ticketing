@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useLogin } from "LoginContext";
+import config from "config";
 
 const OrganizerLoginBody = () => {
 	const { setUser,setIsOrganizer } = useLogin();
@@ -11,7 +12,7 @@ const OrganizerLoginBody = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const response = await fetch(
-			process.env.REACT_APP_API_BASE_URL + "/organizers/login",
+			config.apiBaseUrl + "/organizers/login",
 			{
 				method: "POST",
 				headers: {

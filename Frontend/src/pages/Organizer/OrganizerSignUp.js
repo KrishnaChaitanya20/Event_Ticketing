@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import config from 'config';
 
 const OrganizerSignUp = () => {
     const [email, setEmail] = useState('');
@@ -15,8 +15,8 @@ const OrganizerSignUp = () => {
             return;
         }
         console.log(username, email, password);
-        console.log(process.env.REACT_APP_API_BASE_URL + '/organizers/addOrganizer');
-        const response = await fetch(process.env.REACT_APP_API_BASE_URL + '/organizers/addOrganizer', {
+        console.log(config.apiBaseUrl + '/organizers/addOrganizer');
+        const response = await fetch(config.apiBaseUrl + '/organizers/addOrganizer', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

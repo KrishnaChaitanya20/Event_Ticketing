@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from 'LoginContext';
+import config from 'config';
 import './Profilebody.css'
 
 const Profilebody = () => {
@@ -31,9 +32,9 @@ const Profilebody = () => {
       setIsedit(false);
       const updateInServer=async()=>{
         if(!isOrganizer)
-          var url=process.env.REACT_APP_API_BASE_URL+'/users/updateUser/'+user.id 
+          var url=config.apiBaseUrl+'/users/updateUser/'+user.id 
         else
-          var url=process.env.REACT_APP_API_BASE_URL+'/organizers/updateOrganizer/'+user.id
+          var url=config.apiBaseUrl+'/organizers/updateOrganizer/'+user.id
         console.log(url);
         const response=await fetch(url,{
           method:'PUT',

@@ -1,5 +1,7 @@
+import config from 'config'
+
 const addeventCode = async (event) => {
-    const response = await fetch(process.env.REACT_APP_API_BASE_URL+"/events/addEvent",{
+    const response = await fetch(config.apiBaseUrl+"/events/addEvent",{
         method: 'POST',
         body: event
     })

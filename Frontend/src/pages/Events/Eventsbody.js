@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import './Eventsbody.css';
+import config from 'config';
 
 const Eventsbody = () => {
   const [searchParams] = useSearchParams();
@@ -9,7 +10,7 @@ const Eventsbody = () => {
     const search=searchParams.get('search');
     const type=searchParams.get('type');
     const getEvents = async () => {
-      const base_url=process.env.REACT_APP_API_BASE_URL;
+      const base_url=config.apiBaseUrl;
       try {
         if (search)
           var url = `${base_url}/events?search=${search}`;

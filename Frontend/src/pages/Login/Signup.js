@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import config from 'config';
 import './Loginbody.css'
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -14,8 +15,8 @@ const Signup = () => {
       return;
     }
     console.log(username,email,password);
-    console.log(process.env.REACT_APP_API_BASE_URL+'/addUser');
-    const response = await fetch(process.env.REACT_APP_API_BASE_URL+'/users/addUser', {
+    console.log(config.apiBaseUrl+'/addUser');
+    const response = await fetch(config.apiBaseUrl+'/users/addUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
