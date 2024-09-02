@@ -1,7 +1,7 @@
 services:
   db:
     image: mongo
-    # container_name: mongo
+    container_name: mongodb
     ports:
       - "27017:27017"
     environment:
@@ -10,8 +10,10 @@ services:
     # volumes:
     #   - ./data:/data/db
   backend:
-    image: krishnachaitanya26/et-backend:latest
-    # container_name: et-backend
+    build:
+      context: ./Backend
+      dockerfile: ./Backend/Dockerfile
+    container_name: et-backend
     ports:
       - "5000:5000"
     depends_on:
@@ -19,8 +21,10 @@ services:
     environment:
       MONGO_URI: mongodb://root:pass@db:27017/et
   frontend:
-    image: krishnachaitanya26/et-frontend:latest
-    # container_name: et-frontend
+    build:
+      context: ./Frontend
+      dockerfile: ./Frontend/Dockerfile
+    container_name: et-frontend
     ports:
       - "80:80"
     environment:
