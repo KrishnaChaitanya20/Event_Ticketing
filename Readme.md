@@ -7,7 +7,7 @@ This project is an event booking website built with React for the frontend, Flas
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/SAI-RATHAN/Event_Ticketing.git
+    git clone https://github.com/KrishnaChaitanya20/Event_Ticketing.git
     ```
 
 2. Set up the MongoDB database:
@@ -21,49 +21,66 @@ This project is an event booking website built with React for the frontend, Flas
     - Update the database connection details in the `.env` file.
     - In `Frontend` folder rename `.env.example` to `.env`
     - Update the backend connection details in the `.env` file.
-    ## Usage
 
-    ### Part 1: Starting the backend server
+## Usage
 
-    1. Open a terminal and navigate to the `Backend` folder:
+You can either start the backend and frontend servers separately or use Docker Compose to run the entire application.
 
-        ```bash
-        cd Backend
-        ```
+### Option 1: Starting the backend and frontend servers separately
 
-    2. Install the required dependencies:
+#### Part 1: Starting the backend server
 
-        ```bash
-        pip install -r requirements.txt
-        ```
+1. Open a terminal and navigate to the `Backend` folder:
 
-    3. Start the backend server:
+    ```bash
+    cd Backend
+    ```
 
-        ```bash
-        python app.py
-        ```
+2. Install the required dependencies:
 
-    ### Part 2: Starting the frontend server
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-    1. Open another terminal and navigate to the `Frontend` folder:
+3. Start the backend server:
 
-        ```bash
-        cd Frontend
-        ```
+    ```bash
+    python app.py
+    ```
 
-    2. Install the required dependencies:
+#### Part 2: Starting the frontend server
 
-        ```bash
-        npm ci
-        ```
+1. Open another terminal and navigate to the `Frontend` folder:
 
-    3. Start the frontend server:
+    ```bash
+    cd Frontend
+    ```
 
-        ```bash
-        npm start
-        ```
+2. Install the required dependencies:
 
-3. Access the website in your browser at `http://localhost:3000`.
+    ```bash
+    npm ci
+    ```
+
+3. Start the frontend server:
+
+    ```bash
+    npm start
+    ```
+
+### Option 2: Using Docker Compose
+
+1. Ensure Docker and Docker Compose are installed on your machine.
+
+2. Navigate to the root directory of the project where the `docker-compose.yml` file is located.
+
+3. Start the services using Docker Compose:
+
+    ```bash
+    docker-compose up -d
+    ```
+
+4. Access the website in your browser at `http://localhost:3000`.
 
 ## Contributing
 
