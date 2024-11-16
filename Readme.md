@@ -1,4 +1,4 @@
-# Event Ticketing
+# Event Management
 
 This project is an event booking website built with React for the frontend, Flask for the backend, and MongoDB for the database. The backend code can be found in the `Backend` folder, while the frontend code is located in the `Frontend` folder.
 
@@ -7,13 +7,13 @@ This project is an event booking website built with React for the frontend, Flas
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/KrishnaChaitanya20/Event_Ticketing.git
+    git clone https://github.com/KrishnaChaitanya20/EventManagement.git
     ```
 
 2. Set up the MongoDB database:
 
     - Install MongoDB and start the MongoDB service.
-    - Create a new database named `event_ticketing`.
+    - Create a new database named `events`.
 
 3. Update the environment variables:
 
