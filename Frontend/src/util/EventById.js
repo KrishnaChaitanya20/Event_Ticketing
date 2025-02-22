@@ -5,7 +5,8 @@ const geteventbyid = async (id) => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-        },
+            'Accept': 'application/json'
+          },
     })
     const data = await response.json();
     return data

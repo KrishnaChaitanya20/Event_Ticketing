@@ -5,27 +5,27 @@ import upcomming from 'util/upcommingEvent';
 import './Body.css';
 
 const events1 = [
-  {
-    id: 1,
-    title: "Event 1",
-    date: "June 20, 2024",
-    image: 'default',
-    description: "Description for Event 1",
-  },
-  {
-    id: 2,
-    title: "Event 2",
-    date: "July 15, 2024",
-    image: 'default',
-    description: "Description for Event 2",
-  },
-  {
-    id: 3,
-    title: "Event 3",
-    date: "August 10, 2024",
-    image: 'default', 
-    description: "Description for Event 3",
-  },
+  // {
+  //   id: 1,
+  //   title: "Event 1",
+  //   date: "June 20, 2024",
+  //   image: 'default',
+  //   description: "Description for Event 1",
+  // },
+  // {
+  //   id: 2,
+  //   title: "Event 2",
+  //   date: "July 15, 2024",
+  //   image: 'default',
+  //   description: "Description for Event 2",
+  // },
+  // {
+  //   id: 3,
+  //   title: "Event 3",
+  //   date: "August 10, 2024",
+  //   image: 'default', 
+  //   description: "Description for Event 3",
+  // },
 ];
 
 const UpcomingEvents = () => {

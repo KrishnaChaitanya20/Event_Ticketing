@@ -19,7 +19,13 @@ const Eventsbody = () => {
         else
           var url = `${base_url}/events`;
 
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
         const data = await response.json();
         console.log(data.events);
         setEvents(data.events);

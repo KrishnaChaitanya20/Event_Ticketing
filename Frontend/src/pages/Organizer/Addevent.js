@@ -27,6 +27,8 @@ const AddEvent = () => {
 
   const handleChange = (e) => {
   const { name, value } = e.target;
+  console.log(name, value);
+  
   if (name === "venueName" || name === "venueAddress") {
     setEventDetails({
       ...eventDetails,

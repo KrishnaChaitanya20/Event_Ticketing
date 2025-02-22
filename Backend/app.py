@@ -16,12 +16,12 @@ app.config["MONGO_URI"]=os.environ.get('MONGO_URI')
 mongo.init_app(app)
 
 # Register blueprints here
-app.register_blueprint(eventblueprint, url_prefix='/events')
-app.register_blueprint(bookingblueprint, url_prefix='/bookings')
-app.register_blueprint(userblueprint, url_prefix='/users')
-app.register_blueprint(organizerblueprint, url_prefix='/organizers')
+app.register_blueprint(eventblueprint, url_prefix='/api/events')
+app.register_blueprint(bookingblueprint, url_prefix='/api/bookings')
+app.register_blueprint(userblueprint, url_prefix='/api/users')
+app.register_blueprint(organizerblueprint, url_prefix='/api/organizers')
 
-@app.route('/ping', methods=['GET'])
+@app.route('/api/ping', methods=['GET'])
 def ping():
     return jsonify({'response': 'pong!'})
 

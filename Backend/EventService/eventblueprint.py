@@ -136,7 +136,9 @@ def find_event(id):
 def add_event():
     print("called add event")
     date = request.form.get('eventDate')
+    # print("date",date)
     date=datetime.strptime(date, "%Y-%m-%d").date()
+    # date = datetime.now().date() + timedelta(days=1)
     if date < datetime.now().date():
         return jsonify({'message': 'Invalid date', 'status': 400}), 400
     img = request.files.get('eventImage')

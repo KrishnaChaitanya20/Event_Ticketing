@@ -6,6 +6,7 @@ userblueprint = Blueprint('userblueprint', __name__)
 
 @userblueprint.route('/', methods=['GET'])
 def get_users():
+    print("URL Called")
     search_param = request.args.get('search')
     id= request.args.get('id',False)
     start = int(request.args.get('start', 0))

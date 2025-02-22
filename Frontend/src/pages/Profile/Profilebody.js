@@ -38,8 +38,9 @@ const Profilebody = () => {
         console.log(url);
         const response=await fetch(url,{
           method:'PUT',
-          headers:{
-            'Content-Type':'application/json'
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           },
           body:JSON.stringify({name:newname,email:newemail})
         });

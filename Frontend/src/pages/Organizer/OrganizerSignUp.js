@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import config from 'config';
 
 const OrganizerSignUp = () => {
@@ -8,24 +8,28 @@ const OrganizerSignUp = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
             alert("Passwords do not match");
             return;
         }
-        console.log(username, email, password);
-        console.log(config.apiBaseUrl + '/organizers/addOrganizer');
+        // console.log(username, email, password);
+        // console.log(config.apiBaseUrl + '/organizers/addOrganizer');
         const response = await fetch(config.apiBaseUrl + '/organizers/addOrganizer', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
-            },
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
             body: JSON.stringify({ "name": username, email, password })
         });
 
         const data = await response.json();
         alert(data.message);
+        navigate('/organizer/login');
     };
 
     return (

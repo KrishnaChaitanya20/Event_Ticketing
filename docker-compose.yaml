@@ -2,34 +2,60 @@ services:
   db:
     image: mongo
     container_name: mongodb
-    ports:
-      - "27017:27017"
+    # ports:
+    #   - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: pass
       MONGO_INITDB_DATABASE: et
     volumes:
       - data:/data/db
-
+      
   backend:
     build:
       context: ./Backend
     container_name: et-backend
-    ports:
-      - "5000:5000"
+    # ports:
+    #   - "5000:5000"
     depends_on:
       - db
+    volumes:
+      - ETimages:/Backend/Images
     environment:
       MONGO_URI: mongodb://root:pass@db:27017/et?authSource=admin
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.et-backend.rule=PathPrefix(`/api`)"
+      - "traefik.http.services.et-backend.loadbalancer.server.port=5000"
 
   frontend:
     build:
       context: ./Frontend
+      args:
+        - REACT_APP_API_BASE_URL=/api
     container_name: et-frontend
+    environment:
+      - REACT_APP_API_BASE_URL=/api
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.et-frontend.rule=PathPrefix(`/`)"
+      - "traefik.http.services.et-frontend.loadbalancer.server.port=80"
+
+    
+
+  reverse-proxy:
+    image: traefik:v3.3
+    container_name: traefik
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - "80:80"
-    environment:
-      REACT_APP_API_URL: http://localhost:5000
+      - "8080:8080"
 
 volumes:
   data:
+  ETimages:
