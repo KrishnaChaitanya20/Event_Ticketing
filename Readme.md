@@ -80,7 +80,7 @@ You can either start the backend and frontend servers separately or use Docker C
     docker-compose up -d
     ```
 
-4. Access the website in your browser at `http://localhost:3000`.
+4. Access the website in your browser at `http://localhost`.
 
 ## Contributing
 
